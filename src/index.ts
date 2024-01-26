@@ -1,8 +1,9 @@
 import express from 'express'
-import UserRouter from './user/interfaces/controllers/UserController'
-import TaskRouter from './task/interfaces/controllers/TaskController'
+import UserRouter from './user/infraestructure/controllers/UserController'
+import TaskRouter from './task/infraestructure/controllers/TaskController'
 
 const app = express()
+app.disabled('x-powered-by')
 
 app.use(express.json())
 

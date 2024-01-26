@@ -1,4 +1,4 @@
-import { TaskRepository } from "../interfaces/repository/TaskRepository";
+import { TaskRepository } from "../domain/repository/TaskRepository";
 import { Task } from "../domain/entities/Task";
 
 export class CreateTask {

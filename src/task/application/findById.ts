@@ -1,4 +1,4 @@
-import { TaskRepository } from "../interfaces/repository/TaskRepository";
+import { TaskRepository } from "../domain/repository/TaskRepository";
 
 export class FindTasks {
 
