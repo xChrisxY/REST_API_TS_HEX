@@ -5,12 +5,18 @@ export class CreateUser {
 
       constructor(private readonly repositoy: UserRepository){}
 
-      async run(username: string, password: string, email:string): Promise<User> {
+      async run(username: string, password: string, email:string): Promise<User | null> {
 
-            const user = new User(username, password, email)
-            return await this.repositoy.save(user)
+            try {
+                  const user = new User(username, password, email)
+                  return await this.repositoy.save(user)
+
+            } catch (error) {
+
+                  console.error('Error to create the user: ', error)
+                  return null
+            }
 
       }
-
 
 }

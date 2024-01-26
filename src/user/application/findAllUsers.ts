@@ -6,7 +6,16 @@ export class FindAllUsers {
 
       async run() {
 
-            return await this.repository.findAll()
+            try {
+
+                  return await this.repository.findAll()
+
+            } catch (error) {
+
+                  console.error('Error to find all users: ', error)
+                  return null
+                  
+            }
 
       }
 

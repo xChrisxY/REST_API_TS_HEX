@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { TaskRepository } from "../domain/repository/TaskRepository";
-import { Task } from "../domain/entities/Task";
+import { TaskRepository } from "../../domain/repository/TaskRepository";
+import { Task } from "../../domain/entities/Task";
 
 export class TaskRepositoryPrisma implements TaskRepository {
 
@@ -76,6 +76,12 @@ export class TaskRepositoryPrisma implements TaskRepository {
                         id : parseInt(id)
                   }
             })
+
+      }
+
+      async disconnect(): Promise<void> {
+
+            await this.prisma.$disconnect();
 
       }
       
