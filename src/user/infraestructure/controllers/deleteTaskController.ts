@@ -1,38 +1,38 @@
 import { Request, Response } from "express";
-import { DeleteTask } from "../../application/deleteTask";
+import { DeleteUser } from "../../application/deleteUser";
 
-export class DeleteTaskController {
+export class DeleteUserController {
 
-      constructor(readonly DeleteTask: DeleteTask) {}
+      constructor (readonly DeleteUser : DeleteUser) {}
 
       async run(req: Request, res: Response) {
 
             try {
                   
                   const { id } = req.params;
-                  const taskId = parseInt(id)   
+                  const userId = parseInt(id);
 
-                  if (isNaN(taskId)) {
+                  if (isNaN(userId)) {
 
                         return res.status(400).json({
                               success : false,
-                              message : 'Invalid Task ID'
+                              message : 'Invalid User ID'
                         })
 
                   }
 
-                  await this.DeleteTask.run(id)
+                  await this.DeleteUser.run(id);
 
                   return res.status(200).json({
 
                         success : true,
-                        message : 'Task deleted'
+                        message : 'User deleted'
                   })
 
 
             } catch (error) {
-
-                  console.error('Error deleting Task: ', error)
+                  
+                  console.error('Error deleting User: ', error)
 
                   return res.status(500).json({
                         success : false,
@@ -40,8 +40,8 @@ export class DeleteTaskController {
                         error : error
                   })
 
-                  
-            }  
+            }
+
 
       }
 

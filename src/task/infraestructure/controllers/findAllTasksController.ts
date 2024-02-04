@@ -1,22 +1,16 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import { FindAllTasks } from "../../application/findAllTasks";
 
 export class FindAllTasksController {
 
-      private prisma: PrismaClient;
-
-      constructor(readonly repository: FindAllTasks){
-
-            this.prisma = new PrismaClient();
-      }
+      constructor(readonly FindAllTasks: FindAllTasks){ }
 
       async run(_: Request, res: Response) {
 
             try {
                   
-                  const tasks = await this.prisma.task.findMany();
-
+                  const tasks = await this.FindAllTasks.run()
+                  
                   if (tasks.length > 0) {
 
                         res.status(200).json({
@@ -27,7 +21,6 @@ export class FindAllTasksController {
 
                                     return {
 
-                                          id : task.id,
                                           title : task.title,
                                           description : task.description,
                                           createdAt : task.createdAt,
@@ -59,9 +52,6 @@ export class FindAllTasksController {
                         error : error
                   })
 
-            } finally {
-
-                  await this.prisma.$disconnect()
             }
 
       }

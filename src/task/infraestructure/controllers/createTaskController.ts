@@ -1,17 +1,10 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
 
 import { CreateTask } from "../../application/createTask";
 
 export class CreateTaskController {
 
-      private prisma: PrismaClient;
-
-      constructor(readonly CreateTask: CreateTask){
-
-            this.prisma = new PrismaClient();
-
-      }
+      constructor(readonly CreateTask: CreateTask) { } 
 
       async run(req: Request, res: Response) {
 
@@ -59,11 +52,7 @@ export class CreateTaskController {
                         message : error
                   })
                   
-            } finally {
-
-                  await this.prisma.$disconnect()
-
-            }
+            } 
 
       }
 

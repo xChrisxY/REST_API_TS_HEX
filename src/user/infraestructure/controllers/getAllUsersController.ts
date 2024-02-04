@@ -1,22 +1,15 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import { FindAllUsers } from "../../application/findAllUsers";
 
 export class GetAllUsersController {
 
-      private prisma: PrismaClient;
-
-      constructor(readonly GetAllUsers: FindAllUsers){
-
-            this.prisma = new PrismaClient();
-
-      }
+      constructor(readonly GetAllUsers: FindAllUsers){ }
 
       async run(_: Request, res:Response) {
             
             try {
                   
-                  const users = await this.prisma.user.findMany();
+                  const users = await this.GetAllUsers.run();
 
                   if (users.length > 0){
 
@@ -28,7 +21,6 @@ export class GetAllUsersController {
 
                                     return {
 
-                                          id : user.id,
                                           username : user.username,
                                           password : user.password,
                                           email : user.email
@@ -55,10 +47,6 @@ export class GetAllUsersController {
                         error : error
                   })
                   
-            } finally {
-
-                  await this.prisma.$disconnect();
-
             }
 
       }

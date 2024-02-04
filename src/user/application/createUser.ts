@@ -1,20 +1,36 @@
 import { UserRepository } from "../domain/repository/UserRepository"
 import { User } from "../domain/entities/User"
+import { IEncryptService } from "../domain/repository/IEncryptRepository"
 
 export class CreateUser {
 
-      constructor(private readonly repositoy: UserRepository){}
+      constructor(
+
+            private readonly userRepositoy: UserRepository,
+            private readonly bryptRepository: IEncryptService
+
+      ){}
 
       async run(username: string, password: string, email:string): Promise<User | null> {
 
-            try {
-                  const user = new User(username, password, email)
-                  return await this.repositoy.save(user)
+            try {    
+                  
+                  const result = await this.userRepositoy.findByUsername(username)
+
+                  if (result) throw new Error('User already exists')
+
+                  const hashPassword = await this.bryptRepository.encodePassword(password)
+
+                  const user = new User(username, hashPassword, email)
+
+                  return await this.userRepositoy.save(user)
 
             } catch (error) {
 
                   console.error('Error to create the user: ', error)
+
                   return null
+                  
             }
 
       }

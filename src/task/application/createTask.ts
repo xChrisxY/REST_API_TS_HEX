@@ -1,6 +1,7 @@
 import { TaskRepository } from "../domain/repository/TaskRepository";
 import { Task } from "../domain/entities/Task";
 
+
 export class CreateTask {
 
       constructor(private readonly repository: TaskRepository){}
@@ -19,6 +20,5 @@ export class CreateTask {
             }
 
       }
-
 
 }

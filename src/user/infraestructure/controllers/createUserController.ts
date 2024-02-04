@@ -1,23 +1,16 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
-
 import { CreateUser } from "../../application/createUser";
 
 export class CreateUserController {
 
-      private prisma: PrismaClient;
-
-      constructor(readonly CreateUser: CreateUser) {
-
-            this.prisma = new PrismaClient();
-
-      }
+      constructor(readonly CreateUser: CreateUser) {}
 
       async run(req: Request, res: Response) {
 
             const data = req.body;
 
-            try {
+            try {                     
+                  
                   const user = await this.CreateUser.run(
                         data.username,
                         data.password,
@@ -54,10 +47,6 @@ export class CreateUserController {
                         message : error
                   })
                   
-            } finally {
-
-                  await this.prisma.$disconnect();
-
             }
 
       }
