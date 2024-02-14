@@ -12,10 +12,14 @@ import { BcryptService } from "./services/EncryptService";
 import { AuthUser } from "../application/authUser";
 import { AuthUserController } from "./controllers/authUserController";
 
+import { RabbitMQService } from "./services/RabbitMQService";
+
 export const PrismaUserRepository = new UserRepositoryPrisma()
 export const bcryptRepository = new BcryptService()
+export const brokerRabbitMQ = new RabbitMQService();
 
-export const authUserCase = new AuthUser(PrismaUserRepository, bcryptRepository)
+
+export const authUserCase = new AuthUser(PrismaUserRepository, bcryptRepository, brokerRabbitMQ);
 export const authUserController = new AuthUserController(authUserCase)
 
 export const createUserCase = new CreateUser(PrismaUserRepository, bcryptRepository);
@@ -25,6 +29,7 @@ export const deleteUserCase = new DeleteUser(PrismaUserRepository);
 export const createUserController = new CreateUserController(createUserCase);
 export const findAllUsersController = new GetAllUsersController(getAllUsersCase)
 export const deleteUserController = new DeleteUserController(deleteUserCase)
+
 
 
 

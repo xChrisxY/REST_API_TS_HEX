@@ -22,7 +22,7 @@ export class UserRepositoryPrisma implements UserRepository {
                         email : user.email!,                        
                   }
 
-            })
+            });
             
             return new User(
                   
@@ -86,7 +86,6 @@ export class UserRepositoryPrisma implements UserRepository {
             );
 
       }
-
 
       async disconnect(): Promise<void> {
 

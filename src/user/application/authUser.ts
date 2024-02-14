@@ -1,5 +1,6 @@
 import { IEncryptService } from "../domain/repository/IEncryptRepository";
 import { UserRepository } from "../domain/repository/UserRepository";
+import { RabbitMQService } from "../infraestructure/services/RabbitMQService";
 
 export class AuthUser {
 
@@ -7,6 +8,7 @@ export class AuthUser {
 
             private readonly userRepository: UserRepository,
             private readonly bcryptRepository : IEncryptService,
+            private readonly rabbitMQService : RabbitMQService
 
       ){}
 
@@ -27,6 +29,8 @@ export class AuthUser {
                   throw new Error('Password invalid')
       
             }
+
+            this.rabbitMQService.sendMessage(username);
       
             return user
 
