@@ -1,6 +1,6 @@
 import { IEncryptService } from "../domain/repository/IEncryptRepository";
 import { UserRepository } from "../domain/repository/UserRepository";
-import { RabbitMQService } from "../infraestructure/services/RabbitMQService";
+import { IORabbitInterface } from "../domain/repository/IRabbitRepository";
 
 export class AuthUser {
 
@@ -8,7 +8,7 @@ export class AuthUser {
 
             private readonly userRepository: UserRepository,
             private readonly bcryptRepository : IEncryptService,
-            private readonly rabbitMQService : RabbitMQService
+            private readonly rabbitMQService : IORabbitInterface
 
       ){}
 
