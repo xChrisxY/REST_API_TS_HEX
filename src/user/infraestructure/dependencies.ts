@@ -12,14 +12,16 @@ import { BcryptService } from "./services/EncryptService";
 import { AuthUser } from "../application/authUser";
 import { AuthUserController } from "./controllers/authUserController";
 
-import { RabbitMQService } from "./services/RabbitMQService";
+import { RabbitMQService } from "./servicesRabbitMQ/RabbitMQService";
+import { JWTService } from "./services/servicesJWT/JWTService";
+
 
 export const PrismaUserRepository = new UserRepositoryPrisma()
 export const bcryptRepository = new BcryptService()
 export const brokerRabbitMQ = new RabbitMQService();
+export const jwtService = new JWTService();
 
-
-export const authUserCase = new AuthUser(PrismaUserRepository, bcryptRepository, brokerRabbitMQ);
+export const authUserCase = new AuthUser(PrismaUserRepository, bcryptRepository, brokerRabbitMQ, jwtService);
 export const authUserController = new AuthUserController(authUserCase)
 
 export const createUserCase = new CreateUser(PrismaUserRepository, bcryptRepository);

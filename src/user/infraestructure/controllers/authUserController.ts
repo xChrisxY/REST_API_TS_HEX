@@ -3,26 +3,26 @@ import { AuthUser } from "../../application/authUser";
 
 export class AuthUserController {
 
-      constructor(private readonly authUser : AuthUser){}
+  constructor(private readonly authUser: AuthUser) { }
 
-      async run(req: Request, res : Response) {
+  async run(req: Request, res: Response) {
 
-            const { username, password } = req.body;
+    const { username, password } = req.body;
 
-            try {
-                  
-                  const user = await this.authUser.run(username, password)
+    try {
 
-                  res.status(200).json({success : true, user})
+      const user = await this.authUser.run(username, password)
 
-            } catch (error : any) {
+      res.status(200).json({ success: true, user })
 
-                  const { message } = error
+    } catch (error: any) {
 
-                  res.status(400).json({message : 'Ha ocurrido un error', error : message})
-                  
-            }
+      const { message } = error
 
-      }
+      res.status(400).json({ message: 'Ha ocurrido un error', error: message })
+
+    }
+
+  }
 
 }

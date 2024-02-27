@@ -1,4 +1,4 @@
-import { IEncryptService } from "../../domain/repository/IEncryptRepository";
+import { IEncryptService } from "../../domain/services/IEncryptRepository";
 import bcrypt from 'bcrypt'
 
 export class BcryptService implements IEncryptService {

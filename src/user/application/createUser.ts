@@ -1,6 +1,6 @@
 import { UserRepository } from "../domain/repository/UserRepository"
 import { User } from "../domain/entities/User"
-import { IEncryptService } from "../domain/repository/IEncryptRepository"
+import { IEncryptService } from "../domain/services/IEncryptRepository"
 
 export class CreateUser {
 
