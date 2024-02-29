@@ -1,5 +1,5 @@
 import * as amqp from 'amqplib';
-import { INotification } from '../../domain/services/INotificationAuth';
+import { INotification } from '../../../domain/services/INotificationAuth';
 
 export class RabbitMQService implements INotification {
 
@@ -16,7 +16,6 @@ export class RabbitMQService implements INotification {
   async sendMessage(message: string): Promise<void> {
       
     try {
-  
       
       const connection = await amqp.connect(this.url);
       const channel = await connection.createChannel();
@@ -24,8 +23,7 @@ export class RabbitMQService implements INotification {
 
       let success = await channel.publish(this.exch, "", Buffer.from(message));
 
-      //let status = await channel...
-      if (success) console.log('Mensaje publicado: ' + message);
+      if (success) console.log(message);
 
       await channel.close();
       await connection.close();

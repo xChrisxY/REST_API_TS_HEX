@@ -9,7 +9,6 @@ export class CreateTaskController {
       async run(req: Request, res: Response) {
 
             const data = req.body;
-
             try {
                   
                   const task = await this.CreateTask.run(
@@ -35,7 +34,7 @@ export class CreateTaskController {
 
                   } else {
 
-                        res.status(401).json({
+                        res.status(400).json({
                               success : false,
                               data : 'NO fue posible agregar la tarea',
                               

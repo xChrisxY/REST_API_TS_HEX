@@ -83,7 +83,7 @@ export class UserRepositoryPrisma implements UserRepository {
                   user.password,
                   user.email,
 
-            );
+            )
 
       }
 

@@ -12,7 +12,7 @@ export class AuthUser {
     private readonly rabbitMQService: INotification,
     private readonly jwtService: IJWTRepository
 
-  ) { }
+  ) {}
 
   async run(username: string, password: string) {
 
@@ -31,11 +31,11 @@ export class AuthUser {
       throw new Error('Password invalid')
 
     }
-    const token = await this.jwtService.sign(user.email, '1h')
+    const token = await this.jwtService.sign(user.email, '1h');
     
     user.setJWT(token)
 
-    this.rabbitMQService.sendMessage(username);
+    this.rabbitMQService.sendMessage(JSON.stringify(user.username));
 
     return user
 

@@ -16,7 +16,7 @@ export class TaskRepositoryPrisma implements TaskRepository {
 
                         title : task.title!,
                         description : task.description!,
-                        dueDate : new Date(task.dueDate!).toISOString(),
+                        dueDate : new Date(task.dueDate!),
                         userId : task.userId!
 
                   }

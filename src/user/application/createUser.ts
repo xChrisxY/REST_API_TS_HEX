@@ -7,7 +7,8 @@ export class CreateUser {
       constructor(
 
             private readonly userRepositoy: UserRepository,
-            private readonly bryptRepository: IEncryptService
+            private readonly bryptRepository: IEncryptService,
+            
 
       ){}
 

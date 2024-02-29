@@ -8,11 +8,15 @@ import { FindAllTasksController } from "./controllers/findAllTasksController";
 import { FindByIdController } from "./controllers/findTasksByIdUserController";
 import { DeleteTaskController } from "./controllers/deleteTaskController";
 
+import { RabbitMQService } from "./services/servicesRabbitMQ/RabbitMQService";
+
 import { TaskRepositoryPrisma } from "./repositories/PrismaTaskRepository";
 
 export const PrismaTaskRepository = new TaskRepositoryPrisma()
 
-export const createTaskCase = new CreateTask(PrismaTaskRepository)
+export const brokerRabbitMQ = new RabbitMQService();
+
+export const createTaskCase = new CreateTask(PrismaTaskRepository, brokerRabbitMQ);
 export const findAllTasksCase = new FindAllTasks(PrismaTaskRepository)
 export const findByIdCase = new FindTasks(PrismaTaskRepository)
 export const deleteTaskCase = new DeleteTask(PrismaTaskRepository)
